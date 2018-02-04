@@ -16,13 +16,19 @@ class Block(db.Entity):
     """
     id = PrimaryKey(int, auto=True)    
     population = Required(Decimal)
-    use = Required(Decimal)
+    use = Required(Decimal)  # water usage by populator
     surface_available = Required(Decimal)
     surface_used = Required(Decimal)    
     tank_capacity = Required(Decimal)
     water_stored = Required(Decimal)
 
     precipitation = Set('Precipitation')
+    def next(self, precipitacion):
+        """
+        water stored on next time step
+        """
+        self.water_stored = math.min(self.water_stored + (precipitacion * self.surface_used)
+                                     - (self.population * self.use), self.tank_capacity)
 
     def tank_usage(self, day):
         pass
