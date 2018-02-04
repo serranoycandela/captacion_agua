@@ -1,7 +1,6 @@
 from decimal import Decimal
-from datetime import datetime
+from datetime import date
 
-from pony.converting import str2datetime
 from pony.orm import *
 
 db = Database()
@@ -22,7 +21,7 @@ class Block(db.Entity):
 
 class Precipitation(db.Entity):
     block = Required('Block')
-    day = Required(int)
+    day = Required(date)
     volume = Required(Decimal)    
 
 
