@@ -3,7 +3,7 @@ from os import  listdir
 from os.path import join
 
 original_folder = "/Users/fidel/Dropbox (LNCS)/to_fidel/"
-new_folder = "/Users/fidel/Dropbox (LNCS)/to_fidel_utm/"
+new_folder = "/Users/fidel/Dropbox (LNCS)/precipitacion_por_dia/"
 folders = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
 contador = 0
@@ -17,7 +17,8 @@ for subfolder in folders:
                                   {"INPUT":join(subfolder_path, raster),
                                   "SOURCE_SRS":"EPSG:4326 ",
                                   "DEST_SRS":"EPSG:32614",
-                                  "NO_DATA":"-9999",
+                                  #"NO_DATA":"-9999",
+                                  "NO_DATA":0,
                                   "METHOD":0,
                                   "RTYPE":5,
                                   "COMPRESS":0,
