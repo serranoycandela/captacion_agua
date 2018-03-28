@@ -126,7 +126,7 @@ for manzana in manzana_layer.getFeatures():
     contador += 1
     if contador % 6300 == 0:
         print str(contador / 630)+ "%"
-    consumoAnual = numeroDeDias * manzana['consumo']
+    consumoAnual = numeroDeDias * consumoPorPersona * manzana['ocup_viv']
     if consumoAnual > 0:
         manzana['p_lluvia'] = 100 * (manzana['sum_used'] / consumoAnual)
     else:
