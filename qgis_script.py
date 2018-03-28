@@ -120,17 +120,23 @@ except:
 
 
 contador = 0
+manzana_layer.startEditing()
 print "calculating percentage of comsumption from rain..."
 #calcula p_lluvia que es el porcentaje del consumo anual que se cubriria con captacion de lluvia
 for manzana in manzana_layer.getFeatures():
     contador += 1
     if contador % 6300 == 0:
         print str(contador / 630)+ "%"
-    consumoAnual = numeroDeDias * consumoPorPersona * manzana['ocup_viv']
-    if consumoAnual > 0:
-        manzana['p_lluvia'] = 100 * (manzana['sum_used'] / consumoAnual)
+
+    if manzana['sum_used'] < 0.1:
+        manzana['p_lluvia'] = 0.0
+        #print manzana['cvegeo'],"no hay nada"
     else:
-        manzana['p_lluvia'] = 0
+        consumoAnual = numeroDeDias * consumoPorPersona * manzana['ocup_viv']
+        if consumoAnual > 0:
+            manzana['p_lluvia'] = 100 * (manzana['sum_used'] / consumoAnual)
+        else:
+            manzana['p_lluvia'] = 0
 
     manzana_layer.updateFeature(manzana)
 
