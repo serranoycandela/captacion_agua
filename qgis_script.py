@@ -130,13 +130,22 @@ for manzana in manzana_layer.getFeatures():
 
     if manzana['sum_used'] < 0.1:
         manzana['p_lluvia'] = 0.0
+        manzana['p_lluvia_i'] = 0.0
         #print manzana['cvegeo'],"no hay nada"
     else:
-        consumoAnual = numeroDeDias * consumoPorPersona * manzana['ocup_viv']
+        consumoAnual = numeroDeDias*consumoPorPersona*manzana['ocup_viv']
+        #print manzana['cvegeo'], consumoAnual
         if consumoAnual > 0:
             manzana['p_lluvia'] = 100 * (manzana['sum_used'] / consumoAnual)
         else:
-            manzana['p_lluvia'] = 0
+            manzana['p_lluvia'] = 0.0
+
+        consumoAnual_i = numeroDeDias*manzana['consumo']
+        #print manzana['cvegeo'], consumoAnual
+        if consumoAnual_i > 0:
+            manzana['p_lluvia_i'] = 100 * (manzana['sum_used'] / consumoAnual_i)
+        else:
+            manzana['p_lluvia_i'] = 0.0
 
     manzana_layer.updateFeature(manzana)
 
